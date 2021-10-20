@@ -18,9 +18,7 @@ class Containers extends Component {
         return(
             <Router>
                 <Switch>
-                    <Route exact path="/">
-                        <Login />
-                    </Route>
+                    <Route exact path="/" children={<Login />} />
                     <Route path="/dashboard">
                         <Dashboard />
                     </Route>
