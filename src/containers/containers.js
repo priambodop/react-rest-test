@@ -28,7 +28,7 @@ class Containers extends Component {
                     <Route path="/confirmItem">
                         <ConfirmItem />
                     </Route>
-                    <Route path="/ResultItem">
+                    <Route path="/resultItem">
                         <ResultItem />
                     </Route>
                     </Switch>

@@ -1,26 +1,53 @@
 import React, { PureComponent } from 'react';
-import Button from '../../components/Button/Button';
-import { processLogin } from '../../services/actions/actions';
-import './Login.css'
+import { Redirect } from 'react-router';
+import { LOGIN_INVALID_INPUT } from '../../helpers/constant';
+import { processLogin } from '../../services/actions/LoginActions';
 
 class Login extends PureComponent {
 
   constructor(props){
     super(props);
-    this.handleClick = this.handleClick.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.populateLoginPage = this.populateLoginPage.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleUserInput = this.handleUserInput.bind(this);
     this.state = {
       username: '',
-      password: '', 
+      password: '',
+      isAuthorized: false, 
     }
   }
 
-  handleClick(){
-    processLogin(this.state.username, this.state.password);
+  handleSubmit(){
+    if(this.handleUserInput()){
+      processLogin(this.state.username, this.state.password);
+      this.setState({isAuthorized: true});
+    }else{
+      alert(LOGIN_INVALID_INPUT);
+    }
   }
 
-  render() {
-    return (
-      <div className="loginContainer">
+  handleUserInput(){
+    if(this.state.username !== 'test' || !this.state.username){
+      return false;
+    }else if(this.state.password !== 'test' || !this.state.password){
+      return false;
+    }else{
+      return true;
+    }
+  }
+
+  redirectPage(){
+    if(this.state.isAuthorized){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
+  populateLoginPage(){
+    return(
+      <form onSubmit={this.handleSubmit}>
         <h1>Welcome to The Login Page</h1>
         <p>Username:</p>
         <input
@@ -35,8 +62,17 @@ class Login extends PureComponent {
           value={this.state.password}
         />
         <br />
-        
-        <Button pathName='dashboard' text='LOGIN' onClick={this.handleClick}  />
+
+        <input type='submit' value='LOGIN' />
+      </form>
+    );
+  }
+
+  render() {
+    return (
+      <div>
+        {this.populateLoginPage()}
+        {this.redirectPage() ? <Redirect push to='/dashboard' /> : null}
       </div>
     );
   }
