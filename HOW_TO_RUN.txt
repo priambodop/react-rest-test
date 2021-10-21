@@ -1,0 +1,8 @@
+- Simply clone the repository on your preferable directory
+- Type 'npm install' on your terminal or command prompt
+- Open two terminals or command prompt
+- Go to cloned repository on each terminal or command prompt
+- Type 'node bundle.js' on first terminal/command prompt
+- Type 'npm start' on second terminal/command prompt
+- The browser will automatically pop up and direct to the application. If that is 
+    not the case, simply access http://localhost:3000 in your favorite browser
