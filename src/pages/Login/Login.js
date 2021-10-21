@@ -48,7 +48,7 @@ class Login extends PureComponent {
   populateLoginPage(){
     return(
       <form onSubmit={this.handleSubmit}>
-        <h1>Welcome to The Login Page</h1>
+        <h1>Welcome to The WireTech Market</h1>
         <p>Username:</p>
         <input
           type="text"
@@ -61,9 +61,10 @@ class Login extends PureComponent {
           onChange={(event) => this.setState({password: event.target.value})}
           value={this.state.password}
         />
-        <br />
 
-        <input type='submit' value='LOGIN' />
+        <div className='buttonWrapperLogin'>
+          <button type='submit'>LOGIN</button>
+        </div>
       </form>
     );
   }
