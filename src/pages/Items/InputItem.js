@@ -79,21 +79,21 @@ class InputItem extends PureComponent {
 
   populateForms() {
     return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            Name:{" "}
+      <div className='container' >
+        <form onSubmit={this.handleSubmit} className='formWrapper'>
+        <ul>
+          <li>
+            <label>Name</label>
             <input
               name="name"
               type="text"
               value={this.state.name}
               onChange={this.handleChange}
             />
-          </label>
-          <br />
+          </li>
 
-          <label>
-            Quantity:{" "}
+          <li>
+            <label>Quantity</label>
             <input
               name="quantity"
               type="number"
@@ -101,11 +101,10 @@ class InputItem extends PureComponent {
               value={this.state.quantity}
               onChange={this.handleChange}
             />
-          </label>
-          <br />
+          </li>
 
-          <label>
-            Price:{" "}
+          <li>
+            <label>Price</label>
             <input
               name="price"
               type="number"
@@ -114,44 +113,44 @@ class InputItem extends PureComponent {
               value={this.state.price}
               onChange={this.handleChange}
             />
-          </label>
-          <br />
+          </li>
 
-          <label>
-            Condition:{" "}
+          <li>
+            <label>Condition</label>
             <input
               name="condition"
               type="text"
               value={this.state.condition}
               onChange={this.handleChange}
             />
-          </label>
-          <br />
+          </li>
 
-          <label>
-            Category:{" "}
+          <li>
+            <label>Category</label>
             <input
               name="category"
               list="categories"
               value={this.state.category}
               onChange={this.handleChange}
             />
-          </label>
-          {this.populateListCategories()}
+          </li>
 
-          <label>
-            Stocked Date:{" "}
+          <li>
+            <label>Stocked Date</label>
             <input
               name="stockedDate"
               type="date"
               value={this.state.stockedDate}
               onChange={this.handleChange}
             />
-          </label>
-          <br />
+          </li>
+        </ul>
+          
 
           <br />
-          <input type="submit" value="CONFIRM" />
+          <li>
+            <button type='submit' >CONFIRM</button>
+          </li>
         </form>
       </div>
     );
@@ -160,8 +159,9 @@ class InputItem extends PureComponent {
   render() {
     return (
       <div>
-        <h1>This is your Input Item</h1>
+        <h1>Please input your item</h1>
         {this.populateForms()}
+        {this.populateListCategories()}
         {this.redirectPage() ? <Redirect push to='/confirmItem' /> : null}
       </div>
     );

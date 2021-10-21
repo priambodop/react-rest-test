@@ -2,12 +2,12 @@ import React, { PureComponent } from "react";
 import { Redirect } from "react-router";
 import Items from "../../components/Items/Items";
 import { processGetItemsCategory } from "../../services/actions/ItemsActions";
+import "./Dashboard.css";
 
 class Dashboard extends PureComponent {
   constructor(props) {
     super(props);
     this.populateItems = this.populateItems.bind(this);
-    this.populateItemsList = this.populateItemsList.bind(this);
     this.handleAddItem = this.handleAddItem.bind(this);
     this.handleLogOut = this.handleLogOut.bind(this);
     this.state = {
@@ -51,35 +51,33 @@ class Dashboard extends PureComponent {
       let item = itemsJson.data[i];
 
       returnedItems.push(
-        <div key={`${i}_item`}>
-          <Items
-            name={item.name}
-            quantity={items.quantity}
-            price={item.price}
-            condition={item.condition}
-            category={item.category}
-            stockedDate={item.stockedDate}
-          />
-        </div>
+        <Items
+          key={`${i}_item`}
+          name={item.name}
+          quantity={item.quantity}
+          price={item.price}
+          condition={item.condition}
+          category={item.category}
+          stockedDate={item.stockedDate}
+        />
       );
     }
 
     return returnedItems;
   }
 
-  populateItemsList() {
-    const items = this.populateItems();
-
-    return (<div>{items}</div>);
-  }
-
   render() {
     return (
-      <div>
+      <div className="containerDashboard">
         <h1>This is your Dashboard</h1>
-        {this.populateItemsList()}
-        <button onClick={this.handleAddItem}>ADD ITEM</button>
-        <button onClick={this.handleLogOut}>LOG OUT</button>
+        <form className="formWrapperDashboard">
+          <ul>{this.populateItems()}</ul>
+          <div className="buttonWrapperDashboard">
+            <button onClick={this.handleAddItem}>ADD ITEM</button>
+            <button onClick={this.handleLogOut}>LOG OUT</button>
+          </div>
+        </form>
+
         {this.redirectAddItem() ? <Redirect push to="/inputItem" /> : null}
         {this.redirectLogOut() ? <Redirect to="/" /> : null}
       </div>

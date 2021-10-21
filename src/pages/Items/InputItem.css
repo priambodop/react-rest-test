@@ -1,0 +1,31 @@
+.container{
+    width: 30%;
+    max-width: 1200px;
+    margin: auto;
+    text-align: center;
+    color: white;
+}
+
+.formWrapper {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.formWrapper ul{
+    padding-inline-start: 0px;
+}
+
+.formWrapper li{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    list-style-type: none;
+    margin-bottom: 20px;
+  }
+
+  .formWrapper li button{
+      margin: auto;
+  }

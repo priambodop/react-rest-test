@@ -45,7 +45,8 @@ class ResultItem extends PureComponent {
   render() {
     return (
       <div>
-        <h1>This is your ResultItem</h1>
+        <h1>Item has been added to your dashboard!</h1>
+        <h2>Click done to see your added item</h2>
         <button onClick={this.handleClick}>DONE</button>
         {this.redirectPage() ? <Redirect to='/dashboard' /> : null}
       </div>

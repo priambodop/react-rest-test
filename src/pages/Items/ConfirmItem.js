@@ -1,63 +1,120 @@
-import React, { PureComponent } from 'react';
-import { Redirect } from 'react-router';
-import { processAddItems } from '../../services/actions/ItemsActions';
+import React, { PureComponent } from "react";
+import { Redirect } from "react-router";
+import { processAddItems } from "../../services/actions/ItemsActions";
 
-class ConfirmItem extends PureComponent{
+class ConfirmItem extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.populateAddedItems = this.populateAddedItems.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.redirectPage = this.redirectPage.bind(this);
+    this.handleBack = this.handleBack.bind(this);
+    this.backPage = this.backPage.bind(this);
+    this.state = {
+      isSubmitted: false,
+      isBack: false
+    };
+  }
 
-    constructor(props){
-        super(props);
-        this.populateAddedItems = this.populateAddedItems.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.redirectPage = this.redirectPage.bind(this);
-        this.state = {
-            isSubmitted: false,
-        }
+  handleSubmit() {
+    const holder = localStorage.getItem("addedItems");
+    const addedItems = JSON.parse(holder);
+
+    this.setState({ isSubmitted: true });
+
+    processAddItems(addedItems);
+  }
+
+  handleBack(){
+    this.setState({isBack: true});
+  }
+
+  redirectPage() {
+    if (this.state.isSubmitted) {
+      return true;
+    } else {
+      return false;
     }
+  }
 
-    handleSubmit(){
-        const holder = localStorage.getItem('addedItems');
-        const addedItems = JSON.parse(holder);
+  backPage(){
+      if(this.state.isBack){
+        return true;
+      }else{
+          return false
+      }
+  }
 
-        this.setState({isSubmitted: true});
+  populateAddedItems() {
+    const holder = localStorage.getItem("addedItems");
+    const addedItems = JSON.parse(holder);
 
-        processAddItems(addedItems);
-    }
+    return (
+        <div className='container'>
+      <form onSubmit={this.handleSubmit} className='formWrapper'>
+        <ul>
+          <li>
+            <label>
+              <b>Name</b>{" "}
+            </label>
+            <span>{addedItems.name}</span>
+          </li>
 
-    redirectPage(){
-        if(this.state.isSubmitted){
-            return true;
-        }else{
-            return false;
-        }
-    }
+          <li>
+            <label>
+              <b>Price</b>{" "}
+            </label>
+            <span>{addedItems.price}</span>
+          </li>
 
-    populateAddedItems(){
-        const holder = localStorage.getItem('addedItems');
-        const addedItems = JSON.parse(holder);
+          <li>
+            <label>
+              <b>Quantity</b>{" "}
+            </label>
+            <span>{addedItems.quantity}</span>
+          </li>
 
-        return(
-            <form onSubmit={this.handleSubmit}>
-                <label><b>Name</b> : {addedItems.name}</label><br />
-                <label><b>Quantity</b> : {addedItems.quantity}</label><br />
-                <label><b>Price</b> : {addedItems.price}</label><br />
-                <label><b>Condition</b> : {addedItems.condition}</label><br />
-                <label><b>Category</b> : {addedItems.category}</label><br />
-                <label><b>Stocked Date</b> : {addedItems.stockedDate}</label><br />
+          <li>
+            <label>
+              <b>Condition</b>{" "}
+            </label>
+            <span>{addedItems.condition}</span>
+          </li>
 
-                <input type='submit' value='SUBMIT' />
-            </form>
-        );
-    }
-    
-    render(){
-        return(
-            <div>
-                <h1>This is your ConfirmItem</h1>
-                {this.populateAddedItems()}
-                {this.redirectPage() ? <Redirect push to='/resultItem' /> : null}
-            </div>
-        );
-    }
+          <li>
+            <label>
+              <b>Category</b>{" "}
+            </label>
+            <span>{addedItems.category}</span>
+          </li>
+
+          <li>
+            <label>
+              <b>Stocked Date</b>{" "}
+            </label>
+            <span>{addedItems.stockedDate}</span>
+          </li>
+
+        </ul>
+          <div className='buttonWrapperDashboard'>
+            <button onClick={this.handleBack}>CANCEL</button>
+            <button type="submit">SUBMIT</button>
+          </div>
+      </form>
+      </div>
+    );
+  }
+
+  render() {
+    return (
+      <div>
+        <h1>Please confirm your item</h1>
+        {this.populateAddedItems()}
+        {this.redirectPage() ? <Redirect push to="/resultItem" /> : null}
+        {this.backPage() ? <Redirect to='/inputItem' /> : null}
+      </div>
+    );
+  }
 }
 
 export default ConfirmItem;

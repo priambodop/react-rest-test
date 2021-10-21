@@ -1,0 +1,30 @@
+.wrapper {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    width: 80%;
+    margin: auto;
+}
+
+.wrapper ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    text-align: center;
+}
+
+.wrapper li {
+    display: inline-block;
+    margin: 20px;
+}
+
+.wrapper p {
+  color: white;
+  font-size: 25px;
+  font-family: helvetica;
+}
+
+.wrapper h1{
+    font-size:xx-large
+}
